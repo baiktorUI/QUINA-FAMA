@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.bingo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 90vw;
+  height: 90vh;
+  padding: 2vh;
+  box-sizing: border-box;
+  background-color: #000;
+  color: #ffffff;
+  position: relative;
+}
+
+/* Estilo del título */
+.title {
+  font-size: 4vw;
+  font-weight: bold;
+}
+
+.title-highlight {
+  font-style: italic;
+  color: #ffffff;
+}
+
+/* Sección izquierda con el número aleatorio */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30vw;
+  padding: 2vh;
+}
+
+.display-number {
+  position: relative; /* Necesario para posicionar el destello */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20vh;
+  background-color: #000; /* Fondo oscuro para el número */
+  border-radius: 1vw;
+  overflow: hidden;
+}
+
+.number-text {
+  font-size: 6vw;
+  font-weight: bold;
+  color: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+/* Efecto de destello rápido */
+.flash-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: contain; /* Muestra toda la imagen sin recortarla */
+  background-repeat: no-repeat; /* Evita que se repita */
+  background-position: center;
+  background-image: url('/bg_fx.png'); /* Ruta a la imagen en la carpeta public */
+  animation: flash 0.2s ease-in-out forwards; /* Animación de 0.2s */
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Cartón de Bingo con 9 columnas y 10 filas */
+.bingo-card {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 1vh;
+  width: 60vw;
+  padding: 1vh;
+  background-color: transparent;
+  border-radius: 1vw;
+}
+
+/* Celdas de Bingo */
+.bingo-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  font-size: 2.5vw;
+  font-weight: bold;
+  color: #666;
+  background-color: #d9d9d9;
+  border-radius: 0.8vw;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.bingo-cell.sorted {
+  background-color: #4CAF50;
+  color: #fff;
+}
