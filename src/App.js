@@ -43,6 +43,7 @@ const App = () => {
   const [currentNumber, setCurrentNumber] = useState(null);
   const [previousNumbers, setPreviousNumbers] = useState([]);
   const [showVideo, setShowVideo] = useState(false);
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(true); // Estado para la pantalla de bienvenida
 
   const videoNumbers = [5, 12, 45, 34, 65, 22, 54, 32, 78];
 
@@ -54,7 +55,7 @@ const App = () => {
     const randomNumber = availableNumbers[randomIndex];
 
     setCurrentNumber(randomNumber);
-    setPreviousNumbers(prev => [randomNumber, ...prev].slice(0, 90)); // Mantiene los números marcados
+    setPreviousNumbers(prev => [randomNumber, ...prev].slice(0, 90));
 
     if (videoNumbers.includes(randomNumber)) {
       setShowVideo(true);
@@ -64,7 +65,11 @@ const App = () => {
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      generateRandomNumber();
+      if (showWelcomeScreen) {
+        setShowWelcomeScreen(false); // Oculta la pantalla de bienvenida al presionar Enter
+      } else {
+        generateRandomNumber();
+      }
     }
   };
 
@@ -73,26 +78,35 @@ const App = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [previousNumbers]);
+  }, [previousNumbers, showWelcomeScreen]);
 
   return (
     <div className="app-container">
-      <div className="current-number-box">
-        <div className="current-number">
-          {currentNumber !== null ? currentNumber.toString().padStart(2, '0') : "00"}
+      {showWelcomeScreen ? (
+        <div className="welcome-screen">
+          <h1>COMENÇEM!</h1>
         </div>
-      </div>
-      <div className="previous-numbers-box">
-        {previousNumbers.slice(1, 6).map((num, index) => (
-          <div key={index} className="previous-number">
-            {num.toString().padStart(2, '0')}
+      ) : (
+        <>
+          <div className="current-number-box">
+            <div className="current-number">
+              {currentNumber !== null ? currentNumber.toString().padStart(2, '0') : "00"}
+            </div>
           </div>
-        ))}
-      </div>
-      <VideoPanel show={showVideo} />
-      <BingoBoard markedNumbers={previousNumbers} />
+          <div className="previous-numbers-box">
+            {previousNumbers.slice(1, 6).map((num, index) => (
+              <div key={index} className="previous-number">
+                {num.toString().padStart(2, '0')}
+              </div>
+            ))}
+          </div>
+          <VideoPanel show={showVideo} />
+          <BingoBoard markedNumbers={previousNumbers} />
+        </>
+      )}
     </div>
   );
 };
 
 export default App;
+// Cambio de prueba para sincronización con GitHub
