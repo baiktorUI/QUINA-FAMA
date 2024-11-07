@@ -8,7 +8,6 @@
 
 body, html {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -16,125 +15,258 @@ body, html {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  background: linear-gradient(135deg, #e03c0a, #0e487e, #020234);
 }
 
-/* Pantalla de Bienvenida */
-.welcome-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 5vw;
-  z-index: 1000;
-}
-
-/* Contenedor Principal */
 .app-container {
-  display: grid;
-  grid-template-areas: 
-    "current last-numbers"
-    "video board";
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 1fr;
-  gap: 1vh;
-  padding: 2vh;
-  width: 90vw;
-  height: 90vh;
-  max-width: 100vw;
-  max-height: 100vh;
+  width: 1280px;
+  height: 720px;
   background: rgba(0, 0, 0, 0.2);
+  position: relative;
   border-radius: 12px;
   overflow: hidden;
 }
 
-/* Caja del Número Actual */
 .current-number-box {
-  grid-area: current;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 503px;
+  height: 251px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 1vw;
-  border-radius: 12px;
-  text-align: center;
 }
 
 .current-number {
   font-size: 150px;
-  font-weight: 700;
+  font-weight: bold;
   color: #ffffff;
 }
 
-/* Caja de Últimos Números en Horizontal */
-.previous-numbers-box {
-  grid-area: last-numbers;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 1vw;
-  border-radius: 12px;
+.animate-flash {
+  animation: flash 0.5s ease-in-out;
+}
+
+@keyframes flash {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.side-box {
+  position: absolute;
+  top: 24px;
+  left: calc(24px + 503px + 14px);
+  width: 401px;
+  height: 111px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: space-around;
-  gap: 0.5vw;
+}
+
+.side-content {
+  font-size: 20px;
+  color: #ffffff;
+  display: flex;
+  gap: 20px;
 }
 
 .previous-number {
-  font-size: 50px; /* Tamaño fijo de 50px para los últimos 5 números */
+  font-size: 40px;
   font-weight: 600;
-  color: #ffffff;
 }
 
-/* Panel de Video */
-.video-panel {
-  grid-area: video;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 1vw;
-  border-radius: 12px;
+.opacity-0 { opacity: 1; }
+.opacity-1 { opacity: 0.8; }
+.opacity-2 { opacity: 0.6; }
+.opacity-3 { opacity: 0.4; }
+.opacity-4 { opacity: 0.2; }
+
+.additional-box {
+  position: absolute;
+  top: 24px;
+  left: calc(24px + 503px + 14px + 401px + 14px);
+  width: 300px;
+  height: 111px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 24px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
+  align-items: center;
+  overflow: visible;
 }
 
-/* Tablero de Bingo */
+.logo-image {
+  width: 90%;
+  height: auto;
+  position: relative;
+  left: 0%;
+  top: 0%;
+  z-index: 3;
+}
+
+.large-box {
+  position: absolute;
+  top: calc(24px + 111px + 14px);
+  left: calc(24px + 503px + 14px);
+  width: 715px;
+  height: 482px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 .bingo-board {
-  grid-area: board;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 0.3vw;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 1vw;
-  border-radius: 12px;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: hidden;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
 }
 
 .bingo-number {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  aspect-ratio: 1;
-  font-size: calc(1vw + 0.5vh);
+  font-size: 20px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.5);
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
+  width: 70%;
+  aspect-ratio: 1;
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Números que han salido */
 .bingo-number.marked {
   background-color: #6DFF6A;
   color: #000;
   font-weight: 700;
+}
+
+.bingo-number.faded {
+  opacity: 0.3;
+}
+
+.small-box {
+  position: absolute;
+  top: calc(24px + 111px + 14px + 482px + 14px);
+  left: calc(24px + 503px + 14px);
+  width: 715px;
+  height: 51px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.linia-cantada {
+  font-size: 30px;
+  font-weight: bold;
+  color: #FFD700;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.linia-cantada.show {
+  opacity: 1;
+}
+
+/* Emoji Rain Animation */
+@keyframes fallAndFade {
+  0% {
+    transform: translateY(-100vh); /* Empieza fuera de la pantalla */
+    opacity: 0;
+  }
+  20% {
+    opacity: 1; /* Hace el efecto de fade in */
+  }
+  80% {
+    opacity: 1; /* Se mantiene visible */
+  }
+  100% {
+    transform: translateY(100vh); /* Llega al final de la pantalla */
+    opacity: 0; /* Desvanece con fade out */
+  }
+}
+
+
+.emoji {
+  position: fixed;
+  font-size: 30px;
+  opacity: 0; /* Los emojis inician invisibles */
+  animation: fallAndFade 5s linear infinite;
+  pointer-events: none;
+  z-index: 1000; /* Asegura que los emojis estén al frente */
+}
+
+/* Genera más emojis con diferentes delays y velocidades */
+.emoji:nth-child(1) { left: 10%; animation-delay: 0s; }
+.emoji:nth-child(2) { left: 20%; animation-delay: 0.5s; }
+.emoji:nth-child(3) { left: 30%; animation-delay: 1s; }
+.emoji:nth-child(4) { left: 40%; animation-delay: 1.5s; }
+.emoji:nth-child(5) { left: 50%; animation-delay: 2s; }
+.emoji:nth-child(6) { left: 60%; animation-delay: 2.5s; }
+.emoji:nth-child(7) { left: 70%; animation-delay: 3s; }
+.emoji:nth-child(8) { left: 80%; animation-delay: 3.5s; }
+.emoji:nth-child(9) { left: 90%; animation-delay: 4s; }
+
+.video-box {
+  position: absolute;
+  top: calc(24px + 251px + 14px);
+  left: 24px;
+  width: 503px;
+  height: 407px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.video-box iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.large-box.highlight {
+  z-index: 1000; /* Asegura que el large-box esté al frente de todo */
+  position: relative; /* Habilita el z-index */
+}
+
+.emoji-rain.behind-large-box {
+  z-index: 500; /* Asegura que los emojis estén detrás del large-box */
+  position: absolute; /* Para que el z-index funcione correctamente */
+}
+
+.han-cantat-quina {
+  font-size: 25px; /* Tamaño grande */
+  font-weight: bold;
+  color: #FFD700; /* Color amarillo */
+}
+.emoji-rain-5s .emoji {
+  animation: fallAndFade 3s linear infinite;
+}
+
+.emoji-rain-20s .emoji {
+  animation: fallAndFade 3s linear infinite;
+}
+
+/* Asegura que los emojis no aparezcan si showEmojiRain es false */
+.emoji-rain.hidden .emoji {
+  display: none;
 }
