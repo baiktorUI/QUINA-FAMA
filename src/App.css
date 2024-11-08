@@ -248,10 +248,6 @@ body, html {
   position: relative; /* Habilita el z-index */
 }
 
-.emoji-rain.behind-large-box {
-  z-index: 500; /* Asegura que los emojis estén detrás del large-box */
-  position: absolute; /* Para que el z-index funcione correctamente */
-}
 
 .han-cantat-quina {
   font-size: 25px; /* Tamaño grande */
@@ -269,4 +265,34 @@ body, html {
 /* Asegura que los emojis no aparezcan si showEmojiRain es false */
 .emoji-rain.hidden .emoji {
   display: none;
+}
+.han-cantat-quina {
+  font-size: 25px; /* Tamaño de fuente */
+  font-weight: bold;
+  color: #FFD700;
+  display: flex;
+  align-items: center; /* Alinea verticalmente */
+  justify-content: center; /* Alinea horizontalmente */
+  height: 100%; /* Asegura que ocupe todo el contenedor */
+  width: 100%; /* Asegura que ocupe todo el contenedor */
+  text-align: center; /* Centra el texto */
+}
+
+.current-number-box .han-cantat-quina {
+  font-size: 32px; /* Cambia el tamaño según lo necesites */
+}
+
+.side-box .han-cantat-quina {
+  font-size: 25px; /* Cambia el tamaño según lo necesites */
+}
+
+.video-box .han-cantat-quina {
+  font-size: 60px; /* Cambia el tamaño según lo necesites */
+}
+
+.small-box .han-cantat-quina {
+  font-size: 25px; /* Cambia el tamaño según lo necesites */
+}
+.bingo-number.clickable {
+  cursor: pointer;
 }
